@@ -7,7 +7,7 @@ pub fn template(input: TokenStream) -> TokenStream {
     let mut rust_expressions: Vec<String> = Vec::new();
     let mut template = input.to_string();
 
-    let regex = Regex::new(r"\{\{|\}\}|\{|\(:[^)]+\)\}|\}").unwrap();
+    let regex = Regex::new(r"\{\{|}}|\{|\(:[^)]+\)}|}").unwrap();
     let mut paren_level = 0;
     let mut expr_ranges = Vec::new();
 
@@ -59,7 +59,7 @@ pub fn template(input: TokenStream) -> TokenStream {
         };
     }
 
-    rust_expressions = rust_expressions.into_iter().rev().collect();\
+    rust_expressions = rust_expressions.into_iter().rev().collect();
 
     format!(
         "format!({}, {})",
