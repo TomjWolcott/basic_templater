@@ -51,16 +51,15 @@ pub fn template(input: TokenStream) -> TokenStream {
     }
 
     for &(start, end1, end2) in expr_ranges.iter().rev() {
-        rust_expressions.push(template[start..end1].to_string());
-
+        rust_expressions.push(template[start..end1].to_string().replace("\\\"", "\""));
         template = if end1 == end2 {
             format!("{}{}", &template[..start], &template[end1..])
         } else {
             format!("{}{}{}", &template[..start], &template[end1+1..end2-2], &template[end2-1..])
-        }
+        };
     }
 
-    rust_expressions = rust_expressions.into_iter().rev().collect();
+    rust_expressions = rust_expressions.into_iter().rev().collect();\
 
     format!(
         "format!({}, {})",

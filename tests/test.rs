@@ -4,9 +4,9 @@ use basic_templater::template;
 
 #[test]
 fn test() {
-    let hello = 4;
+    let hello = 4.0;
 
-    println!("{}", template!("{hello+3 (:?)}, {f(2.0)}, {f(2.0) (:?)}, {2 * hello + 8 - if hello > 2 {3} else {5} }"))
+    println!("{}", template!("{ format!(\"{hello:?}\") (:?)} skdjbc if  sudc: sdicu hello { hello + 4.0 }"));
 }
 
 fn f(x: f32) -> f32 {
